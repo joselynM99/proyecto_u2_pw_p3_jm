@@ -1,6 +1,6 @@
 <template>
   <h1>Mi primer componente!!!</h1>
-  <h2>Info estudiante</h2>
+  <h2>{{ valorTitulo }}</h2>
   <p>{{ numero }} <sup>2</sup> = {{ obtenerCuadradoComputado }}</p>
   <!-- <p>{{ numero }} <sup>2</sup> = {{ obtenerCuadradoComputado }}</p>
     <p>{{ numero }} <sup>2</sup> = {{ obtenerCuadradoComputado }}</p>
@@ -15,12 +15,32 @@
 
 <script>
 export default {
-  props: ["titulo"],
+  //Option API-> todo se declara por ociones como el name, etc
+  //1. Forma básica
+  //props: ["titulo", "inicio"],
 
+  /*2. Forma correcta
+  props:{
+    titulo:String,
+    inicio:Number
+  },*/
+
+  //3. Forma avazada
+  props: {
+    titulo:String,
+    inicio:{
+      type:Number,
+      requered:false,
+      default:67, 
+      validator(value){
+        return value>0
+      }
+    }
+  },
   name: "Patito",
   data() {
     return {
-      numero: 2,
+      numero: this.inicio,
     };
   },
   methods: {
@@ -29,17 +49,24 @@ export default {
       return this.numero * this.numero;
     },
     incrementar() {
-      this.numero++;
+      var cadena = "Joselyn";
+      cadena = cadena + "Moncayo";
+      //this.numero++;
+      this.numero = this.numero + 1;
     },
     decrementar() {
-      this.numero--;
+      //this.numero--;
+      this.numero = this.numero - 1;
     },
   },
-  //estas propiedades computadas utilizan memeoria caché
+  // propiedades computadas utilizan memeoria caché, siempre deben rtornar un valor
   computed: {
     obtenerCuadradoComputado() {
       console.log("Se calcula el cuadrado computado");
       return this.numero * this.numero;
+    },
+    valorTitulo() {
+      return this.titulo || "Valor por defecto...";
     },
   },
 };
