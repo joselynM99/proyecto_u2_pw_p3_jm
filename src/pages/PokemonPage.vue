@@ -1,5 +1,5 @@
 <template>
-  <PokemonImg></PokemonImg>
+  <PokemonImg :showPokemon=true :idPokemon="556"></PokemonImg>
   <PokemonOpts></PokemonOpts>
 </template>
 
