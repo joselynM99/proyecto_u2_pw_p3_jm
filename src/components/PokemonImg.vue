@@ -1,25 +1,42 @@
 <template>
   <h1>¿Quién es este pokemon?</h1>
   <div class="pokemon-container">
-    <img
-      v-if="true"
-      class="ocultar-pokemon"
-      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg"
-    />
-    <img
-      v-if="true"
-      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg"
-    />
+    <img v-bind:class="mostrar" id="img" v-bind:src="obtenerImgPorId" />
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    showPokemon: Boolean,
+    idPokemon: {
+      type: Number,
+      requered: false,
+      default: 1,
+    },
+  },
   data() {
     return {
-      idPokemon: 1,
-      mostrarPokemon: true,
+      showPokemon: this.showPokemon,
+      idPokemon: this.idPokemon,
     };
+  },
+
+  computed: {
+    obtenerImgPorId() {
+      return (
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/" +
+        this.idPokemon +
+        ".svg"
+      );
+    },
+    mostrar() {
+      if (this.showPokemon=false) {
+        return "ocultar-pokemon"
+      }else{
+        return " "
+      }
+    },
   },
 };
 </script>
