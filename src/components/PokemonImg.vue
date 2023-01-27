@@ -1,7 +1,9 @@
 <template>
   <h1>¿Quién es este pokemon?</h1>
   <div class="pokemon-container">
-    <img v-bind:class="mostrar" id="img" v-bind:src="obtenerImgPorId" />
+
+    <img v-if="!showPokemon" class="ocultar-pokemon" v-bind:src="obtenerImgPorId" alt="No se puede renderizar">
+    <img v-if="true" v-bind:src="obtenerImgPorId" alt="No se puede renderizar">
   </div>
 </template>
 
@@ -31,9 +33,9 @@ export default {
       );
     },
     mostrar() {
-      if (this.showPokemon=false) {
+      if (this.showPokemon = false) {
         return "ocultar-pokemon"
-      }else{
+      } else {
         return " "
       }
     },
@@ -44,15 +46,18 @@ export default {
 <style>
 .ocultar-pokemon {
   filter: brightness(0);
+  position: absolute;
 }
+
 .pokemon-container {
   height: 250px;
+  
 }
 
 img {
-  position: absolute;
+ 
   height: 200px;
-  left: 45%;
+  
   -webkit-user-drag: none;
 }
 </style>
