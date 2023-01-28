@@ -1,10 +1,29 @@
 <template>
+  <div v-if="mostrar">
+    <h1 v-if="!pokemonCorrecto">Espere por favor......</h1>
+    <div v-else>
 
-  <h1 v-if="!pokemonCorrecto">Espere por favor......</h1>
-  <div v-if="pokemonCorrecto">
-   
-    <PokemonImg :showPokemon="mostrarPokemon" :idPokemon=pokemonCorrecto.id></PokemonImg>
-    <PokemonOpts :pokemons="pokemonArr"></PokemonOpts>
+      <PokemonImg :showPokemon="mostrarPokemon" :idPokemon=pokemonCorrecto.id></PokemonImg>
+      <!--$event representa al objeto enviado en la segunda posicion del evento hijo ValidarRespuesta-->
+      <PokemonOpts :pokemons="pokemonArr" @seleccionadoPokemon="validarRespuesta($event)"></PokemonOpts>
+    </div>
+  </div>
+
+  <div v-if="mostrarMensaje">
+    <div v-if="RCorrecto">
+      <h1>Respuesta Correcta</h1>
+      <button @click="reiniciar">Reiniciar Juego</button>
+
+
+    </div>
+
+    <div v-if="!RCorrecto">
+      <h1>Respuesta Incorrecta</h1>
+      <button @click="reiniciar">Reiniciar Juego</button>
+
+
+    </div>
+
   </div>
 </template>
 
@@ -23,7 +42,11 @@ export default {
     return {
       pokemonArr: [],
       pokemonCorrecto: null,
-      mostrarPokemon:false
+      mostrarPokemon: false,
+      mostrarMensaje: false,
+      RCorrecto: false,
+
+      mostrar:true
     }
   },
   //En los metodos del ciclo de vida no ahce falta ponerle el await
@@ -45,7 +68,39 @@ export default {
 
       this.pokemonCorrecto = this.pokemonArr[numero]
 
+    },
+
+    validarRespuesta(pokSeleccionadoHijo) {
+      console.log("Prueba evento")
+      console.log(pokSeleccionadoHijo)
+      this.mostrarPokemon = true
+
+      const idSeleccionado = pokSeleccionadoHijo.idPoke
+
+
+      if (idSeleccionado == this.pokemonCorrecto.id) {
+          this.mostrarMensaje=true
+          this.RCorrecto = true
+          this.mostrarPokemon =true
+
+          console.log("Correcto")
+      }else{
+        this.mostrarMensaje=true
+        this.RCorrecto =false
+        this.mostrar=false
+      }
+    },
+    reiniciar() {
+      this.mostrarPokemon = false
+      this.cargaPokemonInicial()
+      this.mostrarMensaje=false
+      this.mostrar=true
+      console.log("Incorrecto")
     }
+
+
+
+
   },
 
 };

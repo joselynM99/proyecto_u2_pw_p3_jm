@@ -10,17 +10,20 @@
 <script>
 export default {
   props: {
-    showPokemon: Boolean,
+    showPokemon:  {
+      type: Boolean,
+      requered: true,
+      default: false,
+    },
     idPokemon: {
       type: Number,
       requered: false,
-      default: 1,
+      default: 0,
     },
   },
   data() {
     return {
-      showPokemon: this.showPokemon,
-      idPokemon: this.idPokemon,
+     
     };
   },
 
@@ -49,15 +52,11 @@ export default {
   position: absolute;
 }
 
-.pokemon-container {
-  height: 250px;
-  
-}
+
 
 img {
  
-  height: 200px;
-  
+  height: 200px;  
   -webkit-user-drag: none;
 }
 </style>
