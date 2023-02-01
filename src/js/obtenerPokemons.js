@@ -1,11 +1,7 @@
 const obtenerPokemons = async () => {
-    console.log('calculo de aleatorio')
-    console.log(obtenerAleatorio(1, 5))
+  
     const vec = obtenerVectorNumerico()
-    const vecNombres = await obtenerVectorNombres(vec)
-    console.log(vecNombres)
-    console.table(vecNombres) //impresión de arreglos en tabla
-
+    const vecNombres = await obtenerVectorNombres(vec)   
     return vecNombres
 }
 

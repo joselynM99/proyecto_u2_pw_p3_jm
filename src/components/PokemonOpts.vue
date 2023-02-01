@@ -2,7 +2,7 @@
   <div class="options-container">
       <ul>
         <!--Evento emit (emite un evento al padre), recibe los argumentos: nombre del evento, dato que se va a enviar  -->
-          <li v-for="poke in pokemons" :key="poke.id" @click="$emit('seleccionadoPokemon', {idPoke:poke.id, inventado:20, nombre:poke.nombre})">{{ poke.nombre }}</li>
+          <li v-for="poke in pokemons" :key="poke.id" @click="$emit('seleccionadoPokemon', {idPoke:poke.id, nombre:poke.nombre})">{{ poke.nombre }}</li>
       </ul>
   </div>
 </template>
